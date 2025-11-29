@@ -55,7 +55,7 @@
 ## 4. 页面截图（示例，需替换为你自己的截图）
 
 ![首页示例](https://github.com/3498785671ygl/-/blob/main/assets/screenshots/%E4%B8%BB%E9%A1%B5.png)
-![菜品展示](screenshots/menu.jpg)
+![菜品展示](https://github.com/3498785671ygl/-/blob/main/assets/screenshots/%E8%8F%9C%E5%8D%95.png)
 ![购物车示例](screenshots/cart.jpg)
 
 ---
@@ -63,4 +63,5 @@
 ## 5. 已发布版本的链接
 
 请在成功启用 GitHub Pages 后，将你的上线地址填写如下：
+
 
