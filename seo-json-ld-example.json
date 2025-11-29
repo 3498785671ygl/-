@@ -1,0 +1,156 @@
+{
+  "description": "SEO 结构化数据（JSON-LD）示例",
+  "instructions": "将以下 JSON-LD 脚本添加到 HTML <head> 或 <body> 部分",
+  "examples": [
+    {
+      "name": "餐厅基本信息（Organization）",
+      "script": {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "颐和堂",
+        "alternateName": "颐和堂中式私厨",
+        "description": "颐和堂致力于将传统中餐与现代烹饪理念相结合，提供精致的中式私厨体验。",
+        "url": "https://www.yihetang.com",
+        "logo": "https://www.yihetang.com/assets/logo.svg",
+        "image": "https://www.yihetang.com/assets/hero.jpg",
+        "telephone": "+86-138-0000-0000",
+        "email": "reservations@yihetang.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "凤凰路 88 号",
+          "addressLocality": "示例市",
+          "addressRegion": "示例省",
+          "postalCode": "000000",
+          "addressCountry": "CN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "39.9042",
+          "longitude": "116.4074"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "11:30",
+            "closes": "22:00"
+          }
+        ],
+        "servesCuisine": "Chinese",
+        "priceRange": "$$$",
+        "acceptsReservations": "True",
+        "menu": "https://www.yihetang.com/#menu"
+      }
+    },
+    {
+      "name": "面包屑导航（BreadcrumbList）",
+      "script": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://www.yihetang.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "菜单",
+            "item": "https://www.yihetang.com/#menu"
+          }
+        ]
+      }
+    },
+    {
+      "name": "菜品信息（MenuItem）",
+      "script": {
+        "@context": "https://schema.org",
+        "@type": "MenuItem",
+        "name": "脆皮烤乳猪",
+        "description": "外皮酥脆，肉质鲜嫩，配以秘制酱汁",
+        "image": "https://www.yihetang.com/assets/dish-1.jpg",
+        "offers": {
+          "@type": "Offer",
+          "price": "298",
+          "priceCurrency": "CNY"
+        },
+        "nutrition": {
+          "@type": "NutritionInformation",
+          "calories": "约 450 卡路里"
+        }
+      }
+    },
+    {
+      "name": "本地商家（LocalBusiness）",
+      "script": {
+        "@context": "https://schema.org",
+        "@type": "FoodEstablishment",
+        "name": "颐和堂",
+        "image": "https://www.yihetang.com/assets/hero.jpg",
+        "@id": "https://www.yihetang.com",
+        "url": "https://www.yihetang.com",
+        "telephone": "+86-138-0000-0000",
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "凤凰路 88 号",
+          "addressLocality": "示例市",
+          "addressRegion": "示例省",
+          "postalCode": "000000",
+          "addressCountry": "CN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "39.9042",
+          "longitude": "116.4074"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "11:30",
+          "closes": "22:00"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "156"
+        }
+      }
+    },
+    {
+      "name": "网站信息（WebSite）",
+      "script": {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "颐和堂",
+        "url": "https://www.yihetang.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.yihetang.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    }
+  ],
+  "usage": "在 HTML 中使用示例：",
+  "html_example": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Restaurant\",\n  \"name\": \"颐和堂\",\n  ...\n}\n</script>"
+}
+

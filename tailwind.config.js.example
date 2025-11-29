@@ -1,0 +1,32 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./RestaurantLanding.jsx",
+    "./index.html"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'primary-red': '#8B0000',
+        'primary-black': '#0B0B0B',
+        'ivory-bg': '#F8F4F0',
+        'gold-accent': '#D4AF37',
+        'text-gray': '#4A4A4A',
+      },
+      fontFamily: {
+        'serif': ['Playfair Display', 'Noto Serif SC', 'serif'],
+        'sans': ['Inter', 'Noto Sans SC', 'sans-serif'],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+    },
+  },
+  plugins: [],
+}
+
