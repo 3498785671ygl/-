@@ -236,6 +236,64 @@
     .filter-btn {
       transition: all 0.3s ease;
     }
+    #logo-entrance.show {
+      opacity: 1!important;
+      transform: scale(1)!important;
+      transition: all 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    #logo-title-box.show {
+      opacity: 1!important;
+      transform: translateY(0)!important;
+      transition: all 1.3s cubic-bezier(0.68, -0.55, 0.27, 1.25);
+    }
+    /* 过场动画（主视觉区域） */
+    .hero-ani-fadeinit {
+      opacity: 0;
+      transform: translateY(48px);
+    }
+    .hero-ani-title {
+      animation: fadeUpHero 0.8s cubic-bezier(.39,.575,.565,1) 0.05s forwards;
+    }
+    .hero-ani-desc {
+      animation: fadeUpHero 0.8s cubic-bezier(.39,.575,.565,1) 0.25s forwards;
+    }
+    .hero-ani-line {
+      transform: scaleX(0.15);
+      opacity: 0;
+      transform-origin: center;
+      animation: lineSpread 0.65s cubic-bezier(.39,.575,.565,1) 0.45s forwards;
+    }
+    .hero-ani-btn1 {
+      animation: btnPop 0.5s cubic-bezier(.39,.575,.565,1) 0.7s forwards;
+    }
+    .hero-ani-btn2 {
+      animation: btnPop 0.5s cubic-bezier(.39,.575,.565,1) 0.85s forwards;
+    }
+    .hero-ani-info {
+      animation: slideUp 0.85s cubic-bezier(.39,.575,.565,1) 1s forwards;
+    }
+    @keyframes fadeUpHero {
+      0% { opacity: 0; transform: translateY(48px); }
+      100% { opacity: 1; transform: none; }
+    }
+    @keyframes lineSpread {
+      0% { transform: scaleX(0.15); opacity:0; }
+      85%{ opacity:1; }
+      100% { transform: scaleX(1); opacity:1; }
+    }
+    @keyframes btnPop {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(64px); }
+      to { opacity: 1; transform: none; }
+    }
+    .hero-divider {
+      width: 120px; height: 2.5px; margin: 30px 0 36px 0;
+      background: linear-gradient(90deg, rgba(236,210,124,1) 0%, transparent 100%);
+      border-radius: 1px; margin-left: 0; margin-right: 0;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-[#F8F4F0] text-[#0B0B0B] antialiased">
@@ -244,10 +302,10 @@
   <header class="sticky top-0 z-50 nav-gradient backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-[#F4D03F] rounded-lg flex items-center justify-center text-[#0B0B0B] font-bold text-xl shadow-lg shadow-[#D4AF37]/40 ring-2 ring-[#D4AF37]/30">
+        <div id="logo-entrance" class="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-[#F4D03F] rounded-lg flex items-center justify-center text-[#0B0B0B] font-bold text-xl shadow-lg shadow-[#D4AF37]/40 ring-2 ring-[#D4AF37]/30 opacity-0 scale-75 transition-all duration-1500">
           颐
         </div>
-        <div>
+        <div id="logo-title-box" class="opacity-0 translate-y-7 transition-all duration-1500">
           <h1 class="text-base font-semibold tracking-tight text-[#D4AF37] drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]">颐和堂 · 中式私厨</h1>
           <p class="text-xs text-[#D4AF37]/90">现代中餐 · 致礼东方</p>
         </div>
@@ -292,21 +350,22 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative z-10">
       <div class="z-10 space-y-6">
         <p class="text-sm uppercase tracking-widest text-[#D4AF37] font-medium">传统与匠心</p>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-white" style="letter-spacing: 0.05em; font-weight: 700;">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-white hero-ani-fadeinit" id="heroTitle" style="letter-spacing: 0.05em; font-weight: 700;">
           颐和堂 — 精致中式私厨
         </h2>
-        <p class="text-base md:text-lg text-gray-300 max-w-xl leading-relaxed">
+        <p class="text-base md:text-lg text-gray-300 max-w-xl leading-relaxed hero-ani-fadeinit" id="heroDesc">
           在这里，每一道菜都讲述一个来自东方的故事。甄选时令食材，配以现代烹饪技法，营造温暖而高雅的用餐体验。
         </p>
+        <div class="hero-divider hero-ani-fadeinit" id="heroLine"></div>
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href="#reserve" onclick="scrollToSection(event, 'reserve')" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300">
+          <a href="#reserve" onclick="scrollToSection(event, 'reserve')" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn1">
             立即预约
           </a>
-          <a href="#menu" onclick="scrollToSection(event, 'menu')" class="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/20 text-white font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300">
+          <a href="#menu" onclick="scrollToSection(event, 'menu')" class="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/20 text-white font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn2">
             查看菜单
           </a>
         </div>
-        <div class="pt-6 space-y-2 text-sm text-gray-400">
+        <div class="pt-6 space-y-2 text-sm text-gray-400 hero-ani-fadeinit" id="heroInfo">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1744,6 +1803,37 @@
       }
       initWishlistButtons();
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function(){
+        document.getElementById("logo-entrance")?.classList.add("show");
+      }, 200);
+      setTimeout(function(){
+        document.getElementById("logo-title-box")?.classList.add("show");
+      }, 650);
+    });
+
+    // 主视觉动画依次触发
+    function triggerHeroAni(){
+      document.getElementById('heroTitle').classList.add('hero-ani-title');
+      setTimeout(()=>{
+        document.getElementById('heroDesc').classList.add('hero-ani-desc');
+      },180);
+      setTimeout(()=>{
+        document.getElementById('heroLine').classList.add('hero-ani-line');
+      },380);
+      setTimeout(()=>{
+        document.getElementById('heroBtn1').classList.add('hero-ani-btn1');
+      },620);
+      setTimeout(()=>{
+        document.getElementById('heroBtn2').classList.add('hero-ani-btn2');
+      },750);
+      setTimeout(()=>{
+        document.getElementById('heroInfo').classList.add('hero-ani-info');
+      },950);
+    }
+    // 页面加载自动播放，可扩展为IntersectionObserver方式
+    window.addEventListener('DOMContentLoaded', triggerHeroAni);
   </script>
 
 </body>
