@@ -294,9 +294,451 @@
       background: linear-gradient(90deg, rgba(236,210,124,1) 0%, transparent 100%);
       border-radius: 1px; margin-left: 0; margin-right: 0;
     }
+    /* 预约成功弹窗样式（开始） */
+    .reservation-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 11, 11, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reservation-modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .reservation-modal-content {
+      background: linear-gradient(135deg, #0B0B0B 0%, #1a1a1a 100%);
+      border: 2px solid #D4AF37;
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 
+        0 0 60px rgba(212, 175, 55, 0.4),
+        0 0 30px rgba(212, 175, 55, 0.2),
+        0 20px 80px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(212, 175, 55, 0.1);
+      animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .reservation-modal-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .reservation-modal-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #D4AF37;
+      margin: 0 0 32px 0;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+      font-family: 'Noto Sans SC', sans-serif;
+      text-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+    }
+    .reservation-modal-btn {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
+      color: #0B0B0B;
+      border: none;
+      padding: 14px 48px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+      letter-spacing: 0.5px;
+    }
+    .reservation-modal-btn:hover {
+      background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 100%);
+      box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.6),
+        0 8px 30px rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
+    .reservation-modal-btn:active {
+      transform: translateY(0px);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+    @keyframes modalFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    @keyframes modalFadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+    }
+    .reservation-modal-overlay.hide {
+      animation: overlayFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .reservation-modal-overlay.hide .reservation-modal-content {
+      animation: modalFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes overlayFadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    /* 预约成功弹窗样式（结束） */
+    /* 菜品详情弹窗样式（开始） */
+    .dish-details-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 11, 11, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .dish-details-modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .dish-details-modal-content {
+      background: linear-gradient(135deg, #0B0B0B 0%, #1a1a1a 100%);
+      border: 2px solid #D4AF37;
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      text-align: left;
+      box-shadow: 
+        0 0 60px rgba(212, 175, 55, 0.4),
+        0 0 30px rgba(212, 175, 55, 0.2),
+        0 20px 80px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(212, 175, 55, 0.1);
+      animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .dish-details-modal-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dish-details-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid #D4AF37;
+      border-radius: 50%;
+      color: #D4AF37;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .dish-details-close-btn:hover {
+      background: #D4AF37;
+      color: #0B0B0B;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    }
+    .dish-details-chef-badge {
+      display: none;
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
+      color: #0B0B0B;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+    .dish-details-chef-badge.show {
+      display: inline-block;
+    }
+    .dish-details-image-container {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      position: relative;
+    }
+    .dish-details-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .dish-details-info {
+      padding: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .dish-details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+    .dish-details-name-cn {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 8px 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.2;
+    }
+    .dish-details-name-en {
+      font-size: 13px;
+      color: #D4AF37;
+      margin: 0;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .dish-details-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #D4AF37;
+      white-space: nowrap;
+    }
+    .dish-details-rating {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .rating-score {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .rating-score-value {
+      font-size: 44px;
+      font-weight: 800;
+      color: #D4AF37;
+      text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+      line-height: 1;
+    }
+    .rating-score-unit {
+      font-size: 14px;
+      color: #D4AF37;
+      opacity: 0.8;
+    }
+    .rating-stars {
+      flex: 1;
+    }
+    .stars-display {
+      font-size: 24px;
+      color: #D4AF37;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+    .rating-comment {
+      font-size: 14px;
+      color: #D4AF37;
+      opacity: 0.9;
+      margin: 0;
+    }
+    .dish-details-description {
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 20px;
+    }
+    .description-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #D4AF37;
+      margin: 0 0 12px 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .description-text {
+      font-size: 15px;
+      color: #E0E0E0;
+      line-height: 1.7;
+      margin: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .dish-rating-section {
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    .rating-section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #D4AF37;
+      margin: 0 0 12px 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .rating-input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .user-rating-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      background-color: rgba(11, 11, 11, 0.5);
+      color: #FFFFFF;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .user-rating-input:focus {
+      outline: none;
+      border-color: #D4AF37;
+      background-color: rgba(11, 11, 11, 0.7);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+    .user-rating-input::placeholder {
+      color: rgba(224, 224, 224, 0.5);
+    }
+    .user-rating-submit-btn {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
+      color: #0B0B0B;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    .user-rating-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+    .user-rating-submit-btn:active {
+      transform: translateY(0);
+    }
+    .user-rating-display {
+      font-size: 14px;
+      color: #D4AF37;
+      padding: 10px;
+      background-color: rgba(212, 175, 55, 0.1);
+      border-radius: 6px;
+      border-left: 3px solid #D4AF37;
+      min-height: 20px;
+    }
+    /* 背景音乐控制按钮样式 */
+    .music-toggle-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 6px !important;
+      padding: 8px 12px !important;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+      border: 1.5px solid rgba(212, 175, 55, 0.3);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .music-toggle-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(244, 208, 63, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .music-toggle-btn:hover {
+      border-color: #D4AF37;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+    }
+    .music-toggle-btn:hover::before {
+      opacity: 1;
+    }
+    .music-toggle-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+    }
+    .music-toggle-btn svg {
+      color: #D4AF37;
+      transition: color 0.3s ease;
+      filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.3));
+    }
+    .music-toggle-btn:hover svg {
+      color: #F4D03F;
+      filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.5));
+    }
+    .dish-details-modal-overlay.hide {
+      animation: overlayFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .dish-details-modal-overlay.hide .dish-details-modal-content {
+      animation: modalFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    /* 菜品详情弹窗样式（结束） */
   </style>
 </head>
 <body class="min-h-screen bg-[#F8F4F0] text-[#0B0B0B] antialiased">
+  
+  <!-- 背景音乐 -->
+  <audio id="bgmAudio" preload="auto">
+    <source src="assets/audio/bgm.mp3" type="audio/mpeg">
+  </audio>
   
   <!-- Header -->
   <header class="sticky top-0 z-50 nav-gradient backdrop-blur-md">
@@ -324,6 +766,14 @@
         <a href="#about" class="nav-link" onclick="scrollToSection(event, 'about')">关于</a>
         <a href="#reserve" class="nav-link" onclick="scrollToSection(event, 'reserve')">预约</a>
         <a href="#contact" class="nav-link" onclick="scrollToSection(event, 'contact')">联系</a>
+        <button id="bgm-toggle-btn" class="nav-link inline-flex items-center gap-2 music-toggle-btn" title="点击播放/暂停背景音乐">
+          <svg id="bgm-play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+          </svg>
+          <svg id="bgm-pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5zm8 0a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"/>
+          </svg>
+        </button>
         <button id="wishlist-button" class="nav-link inline-flex items-center gap-2">
           购物车
           <span id="wishlist-count" class="text-xs px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37]">0</span>
@@ -1444,25 +1894,25 @@
         </p>
       </div>
       <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-[#D4AF37]/20 shadow-2xl">
-        <form class="space-y-6">
+        <form id="reservationForm" class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2">姓名</label>
-              <input type="text" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入您的姓名">
+              <input type="text" name="name" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入您的姓名">
             </div>
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2">联系电话</label>
-              <input type="tel" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入联系电话">
+              <input type="tel" name="phone" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入联系电话">
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2">用餐日期</label>
-              <input type="date" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
+              <input type="date" name="date" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
             </div>
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2">用餐人数</label>
-              <select class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
+              <select name="guests" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
                 <option value="" class="bg-[#0B0B0B]">请选择人数</option>
                 <option value="1" class="bg-[#0B0B0B]">1人</option>
                 <option value="2" class="bg-[#0B0B0B]">2人</option>
@@ -1474,7 +1924,7 @@
           </div>
           <div>
             <label class="block text-[#D4AF37] text-sm font-medium mb-2">特殊要求</label>
-            <textarea rows="4" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="如有特殊要求或备注，请在此填写"></textarea>
+            <textarea name="requirements" rows="4" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="如有特殊要求或备注，请在此填写"></textarea>
           </div>
           <div class="pt-4">
             <button type="submit" class="w-full px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300">
@@ -1535,6 +1985,76 @@
       </div>
     </div>
   </footer>
+
+  <!-- 菜品详情弹窗（开始） -->
+  <div id="dishDetailsModal" class="dish-details-modal-overlay">
+    <div class="dish-details-modal-content">
+      <!-- 关闭按钮 -->
+      <button id="dishDetailsCloseBtn" class="dish-details-close-btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- 菜品名称标识 -->
+      <div id="dishDetailsChefBadge" class="dish-details-chef-badge"></div>
+      
+      <!-- 菜品大图 -->
+      <div class="dish-details-image-container">
+        <img id="dishDetailsImage" src="" alt="菜品图片" class="dish-details-image">
+      </div>
+      
+      <!-- 菜品信息 -->
+      <div class="dish-details-info">
+        <!-- 名称 -->
+        <div class="dish-details-header">
+          <div>
+            <h2 id="dishDetailsNameCN" class="dish-details-name-cn"></h2>
+            <p id="dishDetailsNameEN" class="dish-details-name-en"></p>
+          </div>
+          <span id="dishDetailsPrice" class="dish-details-price"></span>
+        </div>
+        
+        <!-- 评分区域 -->
+        <div class="dish-details-rating">
+          <div class="rating-score">
+            <span id="dishDetailsScore" class="rating-score-value">0.0</span>
+            <span class="rating-score-unit">/10</span>
+          </div>
+          <div class="rating-stars">
+            <div id="dishDetailsStars" class="stars-display">★★★★★</div>
+          </div>
+          <p id="dishDetailsComment" class="rating-comment"></p>
+        </div>
+        
+        <!-- 详细介绍 -->
+        <div class="dish-details-description">
+          <h3 class="description-title">菜品介绍</h3>
+          <p id="dishDetailsDescription" class="description-text"></p>
+        </div>
+        
+        <!-- 用户打分区域 -->
+        <div class="dish-rating-section">
+          <h3 class="rating-section-title">您的评分</h3>
+          <div class="rating-input-group">
+            <input type="number" id="userRatingInput" class="user-rating-input" min="0" max="10" step="0.1" placeholder="请输入0-10的评分" />
+            <button id="userRatingSubmitBtn" class="user-rating-submit-btn">提交评分</button>
+          </div>
+          <div id="userRatingDisplay" class="user-rating-display"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 菜品详情弹窗（结束） -->
+
+  <!-- 预约成功弹窗（开始） -->
+  <div id="reservationModal" class="reservation-modal-overlay">
+    <div class="reservation-modal-content">
+      <h2 id="reservationModalText" class="reservation-modal-title"></h2>
+      <button id="reservationModalBtn" class="reservation-modal-btn">确定</button>
+    </div>
+  </div>
+  <!-- 预约成功弹窗（结束） -->
   <script>
     // 平滑滚动函数，处理offset避免遮住标题
     function scrollToSection(event, sectionId) {
@@ -1802,7 +2322,698 @@
         document.addEventListener('click', (e)=>{ if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) { panel.classList.add('hidden'); } });
       }
       initWishlistButtons();
+      
+      // 初始化背景音乐功能
+      initBGM();
     });
+
+    // 背景音乐初始化函数
+    function initBGM() {
+      const bgmAudio = document.getElementById('bgmAudio');
+      const bgmToggleBtn = document.getElementById('bgm-toggle-btn');
+      const bgmPlayIcon = document.getElementById('bgm-play-icon');
+      const bgmPauseIcon = document.getElementById('bgm-pause-icon');
+      
+      if (!bgmAudio || !bgmToggleBtn || !bgmPlayIcon || !bgmPauseIcon) return;
+      
+      // 设置初始音量
+      bgmAudio.volume = 0.3;
+      // 启用循环播放
+      bgmAudio.loop = true;
+      
+      // 尝试自动播放
+      function attemptAutoPlay() {
+        const playPromise = bgmAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // 自动播放成功
+            updateBGMUI();
+          }).catch(error => {
+            // 自动播放被浏览器阻止，等待用户交互
+            console.log('自动播放被阻止，等待用户交互');
+            // 在用户第一次点击时尝试播放
+            document.addEventListener('click', handleFirstUserInteraction, { once: true });
+          });
+        }
+      }
+      
+      function handleFirstUserInteraction() {
+        bgmAudio.play().catch(err => console.log('播放失败:', err));
+        updateBGMUI();
+      }
+      
+      // 页面加载完成后进行初始化延迟，确保资源已加载
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(attemptAutoPlay, 100);
+        });
+      } else {
+        setTimeout(attemptAutoPlay, 100);
+      }
+      
+      // 按钮点击事件处理
+      bgmToggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (bgmAudio.paused) {
+          const playPromise = bgmAudio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => console.log('播放失败:', err));
+          }
+        } else {
+          bgmAudio.pause();
+        }
+        updateBGMUI();
+      });
+      
+      // 监听音频播放和暂停事件
+      bgmAudio.addEventListener('play', updateBGMUI);
+      bgmAudio.addEventListener('pause', updateBGMUI);
+      
+      // 更新UI显示
+      function updateBGMUI() {
+        if (bgmAudio.paused) {
+          bgmPlayIcon.classList.remove('hidden');
+          bgmPauseIcon.classList.add('hidden');
+          bgmToggleBtn.title = '点击播放背景音乐';
+        } else {
+          bgmPlayIcon.classList.add('hidden');
+          bgmPauseIcon.classList.remove('hidden');
+          bgmToggleBtn.title = '点击暂停背景音乐';
+        }
+      }
+    }
+
+    // 预约表单提交处理（开始）
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('reservationForm');
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 获取表单字段
+        const nameInput = form.querySelector('input[name="name"]');
+        const phoneInput = form.querySelector('input[name="phone"]');
+        const dateInput = form.querySelector('input[name="date"]');
+        const guestsInput = form.querySelector('select[name="guests"]');
+
+        // 获取字段值
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const date = dateInput.value.trim();
+        const guests = guestsInput.value.trim();
+
+        // 校验必填项
+        if (!name) {
+          alert('请填写姓名');
+          nameInput.focus();
+          return;
+        }
+        if (!phone) {
+          alert('请填写联系电话');
+          phoneInput.focus();
+          return;
+        }
+        if (!date) {
+          alert('请选择用餐日期');
+          dateInput.focus();
+          return;
+        }
+        if (!guests) {
+          alert('请选择用餐人数');
+          guestsInput.focus();
+          return;
+        }
+
+        // 校验通过，显示成功弹窗
+        showReservationModal(name);
+      });
+
+      // 显示预约成功弹窗
+      function showReservationModal(name) {
+        const modal = document.getElementById('reservationModal');
+        const modalText = document.getElementById('reservationModalText');
+        const modalBtn = document.getElementById('reservationModalBtn');
+
+        if (!modal || !modalText || !modalBtn) return;
+
+        // 设置弹窗文案
+        modalText.textContent = name + '，恭喜您预约成功！';
+
+        // 显示弹窗
+        modal.classList.remove('hide');
+        modal.classList.add('show');
+
+        // 绑定确定按钮点击事件
+        const handleConfirm = function() {
+          closeReservationModal();
+          modalBtn.removeEventListener('click', handleConfirm);
+        };
+
+        modalBtn.addEventListener('click', handleConfirm);
+      }
+
+      // 关闭预约成功弹窗
+      function closeReservationModal() {
+        const modal = document.getElementById('reservationModal');
+        if (!modal) return;
+
+        // 添加关闭动画
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+
+        // 等待动画完成后隐藏
+        setTimeout(() => {
+          modal.classList.remove('hide');
+        }, 300);
+
+        // 可选：清空表单（根据需求决定是否启用）
+        // const form = document.getElementById('reservationForm');
+        // if (form) form.reset();
+      }
+    });
+    // 预约表单提交处理（结束）
+
+    // 菜品详情弹窗功能（开始）
+    document.addEventListener('DOMContentLoaded', function() {
+      // 菜品详细数据库 - 包含所有菜品的详细信息
+      const dishesDatabase = {
+        // 前菜
+        '翡翠白玉卷': {
+          nameCN: '翡翠白玉卷',
+          nameEN: 'Jade & Ivory Rolls',
+          image: 'assets/menu/jade-ivory-rolls.jpg',
+          price: '¥188',
+          score: 8.2,
+          userScore: 0,
+          comment: '精选食客好评',
+          description: '新鲜时蔬配以嫩滑豆腐皮，清雅淡香，层次分明。选用最新鲜的蔬菜和优质豆腐，手工卷制而成。色泽鲜艳，口感爽脆，是开胃的最佳选择。',
+          category: 'appetizer'
+        },
+        '琥珀蜜汁叉烧': {
+          nameCN: '琥珀蜜汁叉烧',
+          nameEN: 'Amber Glazed Char Siu',
+          image: 'assets/menu/amber-char-siu.jpg',
+          price: '¥168',
+          score: 8.4,
+          userScore: 0,
+          comment: '甜香四溢，外焦内嫩',
+          description: '精选梅花肉，古法蜜汁慢烤，外焦内嫩，甜香四溢。经过数小时的烤制，肉质达到完美的口感。琥珀色的外表光泽诱人，入口即化。',
+          category: 'appetizer'
+        },
+        '云丝海蜇': {
+          nameCN: '云丝海蜇',
+          nameEN: 'Cloud Thread Jellyfish',
+          image: 'assets/menu/jellyfish-salad.jpg',
+          price: '¥128',
+          score: 8.3,
+          userScore: 0,
+          comment: '爽脆清甜，开胃怡人',
+          description: '手撕海蜇配以特调酱汁，爽脆清甜，开胃怡人。选用最优质的海蜇，精心切丝。特制的酱汁秘方，让这道菜成为夏日必选之品。',
+          category: 'appetizer'
+        },
+        '金汤燕窝盏': {
+          nameCN: '金汤燕窝盏',
+          nameEN: 'Golden Bird\'s Nest Cup',
+          image: 'assets/menu/bird-nest-golden-broth.jpg',
+          price: '¥388',
+          score: 9.1,
+          userScore: 0,
+          comment: '滋补养颜，温润如玉',
+          description: '上等燕窝配以金汤，温润如玉，滋补养颜。采用高级燕窝，配以精心熬制的金汤。这是一道既美味又富有保健价值的珍馐。',
+          category: 'appetizer'
+        },
+        '松露水晶虾饺': {
+          nameCN: '松露水晶虾饺',
+          nameEN: 'Truffle Crystal Shrimp Dumplings',
+          image: 'assets/menu/truffle-shrimp-dumplings.jpg',
+          price: '¥268',
+          score: 8.6,
+          userScore: 0,
+          comment: '手工包制，皮薄馅鲜',
+          description: '新鲜大虾配以黑松露，手工包制，皮薄馅鲜。虾饺的包法讲究，馅料饱满。松露的香气与虾的鲜美完美结合。',
+          category: 'appetizer'
+        },
+        '花雕醉鸡': {
+          nameCN: '花雕醉鸡',
+          nameEN: 'Shaoxing Wine Marinated Chicken',
+          image: 'assets/menu/drunken-chicken.jpg',
+          price: '¥178',
+          score: 8.5,
+          userScore: 0,
+          comment: '酒香醇厚，肉质鲜嫩',
+          description: '三黄鸡配以陈年花雕，酒香醇厚，肉质鲜嫩。采用传统腌制工艺，让酒香充分渗入鸡肉。冷食更加爽口，是一道经典的前菜。',
+          category: 'appetizer'
+        },
+        '蒜蓉粉丝蒸扇贝': {
+          nameCN: '蒜蓉粉丝蒸扇贝',
+          nameEN: 'Steamed Scallops with Garlic Vermicelli',
+          image: 'assets/menu/garlic-vermicelli-scallops.jpg',
+          price: '¥198',
+          score: 8.7,
+          userScore: 0,
+          comment: '鲜香浓郁，清蒸原味',
+          description: '新鲜扇贝配以蒜蓉粉丝，清蒸保留原味，鲜香浓郁。扇贝的鲜甜与大蒜的香味完美融合，粉丝吸收了所有的汤汁精华。',
+          category: 'appetizer'
+        },
+        '香酥鸭卷配梅子酱': {
+          nameCN: '香酥鸭卷配梅子酱',
+          nameEN: 'Crispy Duck Rolls with Plum Sauce',
+          image: 'assets/menu/crispy-duck-rolls-plum.jpg',
+          price: '¥188',
+          score: 8.8,
+          userScore: 0,
+          comment: '鸭肉鲜香，梅酱酸甜',
+          description: '采用传统烹饪工艺制作脆皮鸭，结合时令蔬菜和薄饼卷裹。鸭皮外酥内嫩，肉质鲜香多汁。配以精心调制的梅子酱，酸甜适中，完美平衡了鸭肉的油腻感，是前菜中的经典之作。',
+          category: 'appetizer'
+        },
+        '凉拌水母丝': {
+          nameCN: '凉拌水母丝',
+          nameEN: 'Jellyfish Salad',
+          image: 'assets/menu/jellyfish-salad.jpg',
+          price: '¥138',
+          score: 8.5,
+          comment: '爽口开胃，夏日必选',
+          description: '选用优质进口水母，切丝细腻，配以特制酱油和麻油调味。爽脆的口感配合香浓的酱汁，每一口都清爽开胃。加入葱段和芝麻提香，是一道经典的凉菜佳品，特别适合炎热的夏日享用。',
+          category: 'appetizer'
+        },
+        '脆皮鸭卷配梅酱': {
+          nameCN: '脆皮鸭卷配梅酱',
+          nameEN: 'Crispy Duck Rolls with Plum Sauce',
+          image: 'assets/menu/crispy-duck-rolls-plum.jpg',
+          price: '¥188',
+          score: 8.7,
+          comment: '鸭肉鲜香，梅酱酸甜',
+          description: '采用传统烹饪工艺制作脆皮鸭，结合时令蔬菜和薄饼卷裹。鸭皮外酥内嫩，肉质鲜香多汁。配以精心调制的梅子酱，酸甜适中，完美平衡了鸭肉的油腻感，是前菜中的经典之作。',
+          category: 'appetizer'
+        },
+        
+        // 主菜
+        '清蒸东星斑': {
+          nameCN: '清蒸东星斑',
+          nameEN: 'Steamed Red Grouper',
+          image: 'assets/menu/steamed-red-grouper.jpg',
+          price: '¥388',
+          score: 8.8,
+          comment: '新鲜食材，清蒸原味',
+          description: '选用鲜活的东星斑，采用传统清蒸手法保留原汁原味。配以特调的豉油和葱油，鱼肉鲜甜细腻，口感滑嫩。每一口都能品出大海的鲜香，是对高品质食材最好的致敬。',
+          category: 'main'
+        },
+        '宫保虾球': {
+          nameCN: '宫保虾球',
+          nameEN: 'Kung Pao Shrimp Balls',
+          image: 'assets/menu/kung-pao-shrimp-balls.jpg',
+          price: '¥268',
+          score: 8.4,
+          comment: '虾球饱满，宫保火候到位',
+          description: '精选大颗虾仁制成虾球，配以花生和干辣椒。火候把控精妙，虾球外焦内嫩，香辣适中。宫保酱汁均匀包裹每一颗食材，酸甜咸辣层次分明，是经典川菜的完美演绎。',
+          category: 'main'
+        },
+        '糖醋里脊': {
+          nameCN: '糖醋里脊',
+          nameEN: 'Sweet and Sour Pork Tenderloin',
+          image: 'assets/menu/sweet-sour-pork-tenderloin.jpg',
+          price: '¥198',
+          score: 8.3,
+          comment: '外酥内嫩，糖醋完美',
+          description: '选用上好的里脊肉，裹以蛋液炸至金黄。外层酥脆，内里鲜嫩多汁。精心调配的糖醋汁酸甜适中，完美平衡了油炸的厚重感，每一口都是经典中式美食的精髓。',
+          category: 'main'
+        },
+        '麻婆豆腐': {
+          nameCN: '麻婆豆腐',
+          nameEN: 'Mapo Tofu',
+          image: 'assets/menu/mapo-tofu.jpg',
+          price: '¥168',
+          score: 8.1,
+          comment: '麻辣鲜香，下饭佳品',
+          description: '嫩滑豆腐配以特制肉末，采用川菜传统做法烹制。麻辣味道浓郁而不突兀，豆腐入味但保持口感。这是一道真正的经典川菜，无论是在家还是在餐厅，都能品出家的味道。',
+          category: 'main'
+        },
+        '红烧狮子头': {
+          nameCN: '红烧狮子头',
+          nameEN: 'Braised Lion\'s Head Meatballs',
+          image: 'assets/menu/braised-lions-head.jpg',
+          price: '¥248',
+          score: 8.6,
+          comment: '手工制作，肉质细腻',
+          description: '采用手工制作的大颗肉丸，选材讲究，配方传统。慢火红烧至入味透彻，肉质鲜嫩，汤汁浓郁。每一个狮子头都饱满多汁，是上海菜系的代表之作，承载了岁月的味道。',
+          category: 'main'
+        },
+        '白切鸡配姜葱蘸料': {
+          nameCN: '白切鸡配姜葱蘸料',
+          nameEN: 'Poached Chicken with Ginger Scallion Dip',
+          image: 'assets/menu/poached-chicken-ginger-scallion.jpg',
+          price: '¥158',
+          score: 8.0,
+          comment: '鸡肉鲜嫩，姜葱提香',
+          description: '选用优质三黄鸡，采用白切工艺保留原汁原味。鸡肉嫩滑多汁，配以精心调制的姜葱蘸料。这道菜简而精，最能检验食材的品质和厨师的手艺，是粤菜中的经典之选。',
+          category: 'main'
+        },
+        
+        // 招牌菜
+        '佛跳墙': {
+          nameCN: '佛跳墙',
+          nameEN: 'Buddha Jumps Over the Wall',
+          image: 'assets/menu/buddha-jumps-over-the-wall.jpg',
+          price: '¥688',
+          score: 9.4,
+          comment: 'Chef\'s Recommendation - 传奇美食',
+          description: '这是一道传奇的佛跳墙，选用多种名贵食材精心烹制。整只鲍鱼、海参、冬虫夏草、山珍等汇聚一身。各种食材在高汤中相互融合，香气四溢，每一口都能品出材料的尊贵与厨师的用心。这是我们的招牌菜之一，也是颐和堂的代表作。',
+          category: 'signature'
+        },
+        '东坡肉': {
+          nameCN: '东坡肉',
+          nameEN: 'Dongpo Pork',
+          image: 'assets/menu/dongpo-pork.jpg',
+          price: '¥328',
+          score: 9.5,
+          comment: 'Chef\'s Recommendation - 极致享受',
+          description: '红烧东坡肉，采用传统宋朝食谱的现代演绎。选用五花肉最嫩的部分，经过长时间的炖煮至软烂。肥而不腻，瘦而不柴，入口即化。配以酱汁，浓郁醇厚，是我们对经典美食的最深致敬。',
+          category: 'signature'
+        },
+        '清蒸鸡': {
+          nameCN: '清蒸东星斑配特制豉油',
+          nameEN: 'Steamed Red Grouper with Special Soy Sauce',
+          image: 'assets/menu/steamed-red-grouper.jpg',
+          price: '¥488',
+          score: 9.2,
+          userScore: 0,
+          comment: 'Chef\'s Recommendation - 食客至爱',
+          description: '这是我们招牌鱼类料理的升华版本。采用最新鲜的高端食材，配以秘制的豉油。通过精准的火候控制，保证鱼肉的完美口感。每一次享用都是对美食的一次新的诠释。',
+          category: 'signature'
+        },
+        '酱爆鸭': {
+          nameCN: '酱爆鸭',
+          nameEN: 'Sauce-Braised Duck',
+          image: 'assets/menu/crispy-suckling-pig.jpg',
+          price: '¥398',
+          score: 9.3,
+          userScore: 0,
+          comment: 'Chef\'s Recommendation - 鸭肉之选',
+          description: '精选上好鸭只，采用传统酱爆手法烹制。鸭肉香嫩，火候恰到好处。特制的酱料赋予了这道菜独特的风味。咸香酱重，却不失食材的本味，是我们厨师团队多年经验的结晶。',
+          category: 'signature'
+        },
+        
+        // 中式茶饮
+        '龙井茶虾': {
+          nameCN: '龙井茶虾',
+          nameEN: 'Longjing Tea Shrimp',
+          image: 'assets/menu/longjing-tea-shrimp.jpg',
+          price: '¥298',
+          score: 8.3,
+          userScore: 0,
+          comment: '茶香入菜，别具一格',
+          description: '采用西湖龙井茶叶融入烹饪中，虾仁鲜嫩，茶香清幽。这道菜完美展现了杭帮菜的精妙之处，将饮茶的优雅融入了美食。微妙的茶香和虾的鲜甜相辅相成，是一道充满文化底蕴的佳肴。',
+          category: 'beverage-tea'
+        },
+        '冷泡茉莉茶': {
+          nameCN: '冷泡茉莉茶',
+          nameEN: 'Cold Brew Jasmine Tea',
+          image: 'assets/menu/cold-brew-jasmine-tea.jpg',
+          price: '¥68',
+          score: 8.0,
+          userScore: 0,
+          comment: '清香怡人，消暑首选',
+          description: '精选茉莉花茶，采用冷泡工艺保留最纯净的香气。茶汤清澈透亮，香气馥郁。冰爽的温度和花香的清新完美结合，是炎热季节里最舒服的选择，为您的用餐增添几分惬意。',
+          category: 'beverage-tea'
+        },
+        '西湖龙井茶': {
+          nameCN: '西湖龙井茶',
+          nameEN: 'West Lake Longjing Tea',
+          image: 'assets/menu/west-lake-longjing-tea.jpg',
+          price: '¥88',
+          score: 8.4,
+          userScore: 0,
+          comment: '中国名茶，回甘悠长',
+          description: '采用明前茶谷雨茶，精选龙井茶中的精品。这是中国十大名茶之一，香气清高，滋味甘醇。每一泡都承载了浓厚的文化底蕴，在品茶中体验禅意，是一种生活的态度。',
+          category: 'beverage-tea'
+        },
+        '白毫银针茶': {
+          nameCN: '白毫银针茶',
+          nameEN: 'Silver Needle White Tea',
+          image: 'assets/menu/silver-needle-white-tea.jpg',
+          price: '¥128',
+          score: 8.6,
+          userScore: 0,
+          comment: '白茶珍品，清甜甘醇',
+          description: '选用白茶中的珍品白毫银针，全由茶芽组成。茶汤清透明亮，香气清香幽雅。饮后齿颊留香，回甘明显。这是白茶爱好者的心头好，也是我们对健康生活方式的诠释。',
+          category: 'beverage-tea'
+        },
+        
+        // Pre-Dinner 鸡尾酒
+        '茉莉马提尼': {
+          nameCN: '茉莉马提尼',
+          nameEN: 'Jasmine Martini',
+          image: 'assets/menu/jasmine-martini.jpg',
+          price: '¥128',
+          score: 8.2,
+          comment: '花香优雅，开胃之选',
+          description: '以经典马提尼为基础，加入新鲜茉莉花香。兼具琴酒的干爽和茉莉的清香，是开启晚宴的完美前奏。一口饮下，花香和酒香在味蕾上舞动，优雅而不失活力。',
+          category: 'beverage-cocktail'
+        },
+        '柠檬杜松子酒': {
+          nameCN: '柠檬杜松子酒&汤力',
+          nameEN: 'Lemongrass Gin & Tonic',
+          image: 'assets/menu/lemongrass-gin-tonic.jpg',
+          price: '¥118',
+          score: 8.1,
+          comment: '柠檬香草，清爽开胃',
+          description: '用新鲜柠檬草和杜松子酒调配，配以优质汤力水。清爽的草本香气混合柑橘的酸甜，是夏日的完美饮品。冰爽的口感和谐的风味，让您在用餐前就能感受到清新的愉悦。',
+          category: 'beverage-cocktail'
+        },
+        
+        // Main Course 饮品
+        '玫瑰气泡酒': {
+          nameCN: '玫瑰气泡酒',
+          nameEN: 'Rose Sparkling',
+          image: 'assets/menu/rose-sparkling.jpg',
+          price: '¥288',
+          score: 8.4,
+          comment: '精致优雅，适配各类菜肴',
+          description: '来自欧洲的精选玫瑰气泡酒，呈现迷人的粉红色。酒体轻盈，果香充足。细腻的气泡和优雅的风味完美搭配我们的各类菜品，无论是海鲜还是肉类，都能找到完美的和谐点。',
+          category: 'beverage-wine'
+        },
+        '年份香槟': {
+          nameCN: '年份香槟',
+          nameEN: 'Champagne',
+          image: 'assets/menu/champagne.jpg',
+          price: '¥428',
+          score: 8.7,
+          comment: '法国佳酿，庆祝时刻',
+          description: '精选年份香槟，来自法国香槟区。浓郁的酵母香气，优雅的气泡，成熟的果香。每一次品尝都是一种仪式感，适合重要时刻的庆祝，也是我们对生活品质的追求。',
+          category: 'beverage-wine'
+        },
+        '绍兴花雕': {
+          nameCN: '绍兴花雕',
+          nameEN: 'Shaoxing Huadiao',
+          image: 'assets/menu/shaoxing-huadiao.jpg',
+          price: '¥168',
+          score: 8.3,
+          comment: '中国传统，醇厚甘美',
+          description: '选用绍兴地区的传统花雕酒，历经多年陈化。琥珀般的色泽，醇厚的口感，微妙的甜味。这是中国古老文化的代表，在品味中体验传统工艺的精妙，是对国粹的最好诠释。',
+          category: 'beverage-wine'
+        },
+        '五粮液': {
+          nameCN: '五粮液',
+          nameEN: 'Wuliangye Baijiu',
+          image: 'assets/menu/wuliangye-baijiu.jpg',
+          price: '¥298',
+          score: 8.5,
+          comment: '中国白酒，浓香型代表',
+          description: '中国十大名酒之一，采用五种谷物酿造。香气复杂优雅，入口绵软，回味悠长。每一口都能感受到中国白酒文化的深厚底蕴，是高端宴饮的必选之品。',
+          category: 'beverage-wine'
+        },
+        
+        // After-Dinner 餐后酒
+        '茅台白酒': {
+          nameCN: '茅台白酒',
+          nameEN: 'Moutai Baijiu',
+          image: 'assets/menu/moutai-baijiu.jpg',
+          price: '¥358',
+          score: 9.1,
+          comment: '中国国酒，品味标杆',
+          description: '世界三大蒸馏酒之一，中国的骄傲。采用特殊的生产工艺，历经多年陈化。香气独特，口感醇厚，回味悠长。这是餐后品尝的极致选择，也是对用餐的完美句号。',
+          category: 'beverage-after'
+        },
+        '丹魄葡萄酒': {
+          nameCN: '坦桑尼亚威士忌',
+          nameEN: 'Tangerine Whiskey',
+          image: 'assets/menu/tangerine-whiskey.jpg',
+          price: '¥198',
+          score: 8.2,
+          comment: '柑橘风味，温暖醇厚',
+          description: '融合坦桑尼亚的柑橘香气与优质威士忌。琥珀色的酒液承载了多层次的风味。柑橘的清新和威士忌的醇厚完美融合，是餐后放松身心的最佳伴侣。',
+          category: 'beverage-after'
+        },
+        '桂花蜂蜜酒': {
+          nameCN: '桂花蜂蜜酒',
+          nameEN: 'Osmanthus Honey Wine',
+          image: 'assets/menu/osmanthus-honey-wine.jpg',
+          price: '¥128',
+          score: 8.4,
+          comment: '温润甘美，舌尖享受',
+          description: '桂花配蜂蜜，花香清甜，口感温润。这是一款女性和温和饮者的理想选择。微妙的桂花香和蜂蜜的甜蜜在口中交织，给餐后时光增添一份惬意和温暖。',
+          category: 'beverage-after'
+        }
+      };
+
+      // 为所有菜品卡片添加点击事件
+      function initDishModal() {
+        const menuCards = document.querySelectorAll('.menu-card');
+        const modal = document.getElementById('dishDetailsModal');
+        const closeBtn = document.getElementById('dishDetailsCloseBtn');
+        
+        if (!modal || !closeBtn) return;
+        
+        // 关闭弹窗函数
+        function closeModal() {
+          modal.classList.add('hide');
+          modal.classList.remove('show');
+          
+          setTimeout(() => {
+            modal.classList.remove('hide');
+          }, 300);
+        }
+        
+        // 关闭按钮点击事件
+        closeBtn.addEventListener('click', closeModal);
+        
+        // 遮罩层点击关闭
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+        
+        // 当前菜品名称（用于保存用户评分）
+        let currentDishName = '';
+        
+        // 为每个卡片添加点击事件
+        menuCards.forEach(card => {
+          // 跳过画廊中的卡片
+          if (card.closest('#gallery')) return;
+          
+          // 提取菜品信息
+          const titleElement = card.querySelector('h3');
+          const engElement = card.querySelector('p.text-xs.text-\\[\\#D4AF37\\]');
+          const priceElement = card.querySelector('span.text-xl.font-bold.text-\\[\\#D4AF37\\]');
+          const descElement = card.querySelector('p.text-\\[\\#4A4A4A\\]');
+          const imgElement = card.querySelector('img');
+          
+          if (!titleElement) return;
+          
+          const dishName = titleElement.textContent.trim();
+          
+          // 添加光标样式
+          card.style.cursor = 'pointer';
+          
+          // 点击卡片打开弹窗
+          card.addEventListener('click', function() {
+            currentDishName = dishName;
+            
+            // 从数据库获取数据，或从HTML中获取
+            let dishData = dishesDatabase[dishName];
+            
+            if (!dishData) {
+              // 如果没有完整的数据库条目，从HTML中创建
+              dishData = {
+                nameCN: dishName,
+                nameEN: engElement ? engElement.textContent.trim() : '',
+                image: imgElement ? imgElement.src : '',
+                price: priceElement ? priceElement.textContent : '',
+                score: 8.0,
+                userScore: 0,
+                comment: '用户评价待收集',
+                description: descElement ? descElement.textContent : '暂无详细介绍',
+                category: 'other'
+              };
+            }
+            
+            // 设置弹窗内容
+            document.getElementById('dishDetailsNameCN').textContent = dishData.nameCN;
+            document.getElementById('dishDetailsNameEN').textContent = dishData.nameEN;
+            document.getElementById('dishDetailsPrice').textContent = dishData.price;
+            document.getElementById('dishDetailsImage').src = dishData.image;
+            document.getElementById('dishDetailsImage').alt = dishData.nameCN;
+            document.getElementById('dishDetailsScore').textContent = dishData.score.toFixed(1);
+            document.getElementById('dishDetailsDescription').textContent = dishData.description;
+            document.getElementById('dishDetailsComment').textContent = dishData.comment;
+            
+            // 招牌菜显示徽章
+            const badge = document.getElementById('dishDetailsChefBadge');
+            if (dishData.category === 'signature') {
+              badge.textContent = "★ Chef's Recommendation ★";
+              badge.classList.add('show');
+            } else {
+              badge.classList.remove('show');
+            }
+            
+            // 星级显示
+            const stars = Math.round(dishData.score / 2);
+            const starsDisplay = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+            document.getElementById('dishDetailsStars').textContent = starsDisplay;
+            
+            // 清空用户评分输入框
+            const userRatingInput = document.getElementById('userRatingInput');
+            userRatingInput.value = '';
+            
+            // 显示用户评分信息
+            const userRatingDisplay = document.getElementById('userRatingDisplay');
+            if (dishData.userScore && dishData.userScore > 0) {
+              userRatingDisplay.textContent = `您的评分：${dishData.userScore.toFixed(1)}/10`;
+            } else {
+              userRatingDisplay.textContent = '暂无评分';
+            }
+            
+            // 显示弹窗
+            modal.classList.remove('hide');
+            modal.classList.add('show');
+          });
+        });
+        
+        // 用户评分提交事件
+        const userRatingSubmitBtn = document.getElementById('userRatingSubmitBtn');
+        if (userRatingSubmitBtn) {
+          userRatingSubmitBtn.addEventListener('click', function() {
+            const userRatingInput = document.getElementById('userRatingInput');
+            const rating = parseFloat(userRatingInput.value);
+            
+            // 验证评分
+            if (isNaN(rating) || rating < 0 || rating > 10) {
+              alert('请输入0-10之间的有效评分');
+              return;
+            }
+            
+            // 保存用户评分到数据库
+            if (currentDishName) {
+              if (!dishesDatabase[currentDishName]) {
+                dishesDatabase[currentDishName] = {
+                  userScore: rating
+                };
+              } else {
+                dishesDatabase[currentDishName].userScore = rating;
+              }
+              
+              // 更新显示
+              const userRatingDisplay = document.getElementById('userRatingDisplay');
+              userRatingDisplay.textContent = `您的评分：${rating.toFixed(1)}/10 ✓`;
+              
+              // 清空输入框
+              userRatingInput.value = '';
+              
+              // 显示成功提示
+              setTimeout(() => {
+                userRatingDisplay.textContent = `您的评分：${rating.toFixed(1)}/10`;
+              }, 1500);
+            }
+          });
+        }
+      }
+      
+      // 页面加载完成后初始化
+      initDishModal();
+    });
+    // 菜品详情弹窗功能（结束）
 
     document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function(){
