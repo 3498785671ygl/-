@@ -91,6 +91,8 @@
   }
   </script>
   <script src="search.js"></script>
+  <script src="i18n.js"></script>
+  <script src="scroll-nav.js"></script>
   
   <!-- 全页面黑金渐变流动背景样式表 -->
   <link rel="stylesheet" href="style.css">
@@ -759,16 +761,16 @@
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#D4AF37]">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"/></svg>
             </span>
-            <input id="menu-search" type="text" placeholder="搜索菜品…" class="pl-9 pr-3 py-2 w-64 rounded-full bg-gradient-to-br from-[#0B0B0B] to-[#1a1a1a] border-2 border-[#D4AF37]/40 text-[#D4AF37] placeholder-[#D4AF37]/60 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37] hover:border-[#D4AF37]" />
+            <input id="menu-search" type="text" data-i18n="searchPlaceholder" placeholder="搜索菜品…" class="pl-9 pr-3 py-2 w-64 rounded-full bg-gradient-to-br from-[#0B0B0B] to-[#1a1a1a] border-2 border-[#D4AF37]/40 text-[#D4AF37] placeholder-[#D4AF37]/60 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37] hover:border-[#D4AF37]" />
           </div>
         </div>
       </div>
       <nav class="hidden md:flex gap-8 text-sm items-center">
-        <a href="#menu" class="nav-link" onclick="scrollToSection(event, 'menu')">菜单</a>
-        <a href="#gallery" class="nav-link" onclick="scrollToSection(event, 'gallery')">图集</a>
-        <a href="#about" class="nav-link" onclick="scrollToSection(event, 'about')">关于</a>
-        <a href="#reserve" class="nav-link" onclick="scrollToSection(event, 'reserve')">预约</a>
-        <a href="#contact" class="nav-link" onclick="scrollToSection(event, 'contact')">联系</a>
+        <a href="#menu" class="nav-link" data-i18n="menuNav" onclick="scrollToSection(event, 'menu')">菜单</a>
+        <a href="#gallery" class="nav-link" data-i18n="galleryNav" onclick="scrollToSection(event, 'gallery')">图集</a>
+        <a href="#about" class="nav-link" data-i18n="aboutNav" onclick="scrollToSection(event, 'about')">关于</a>
+        <a href="#reserve" class="nav-link" data-i18n="reserveNav" onclick="scrollToSection(event, 'reserve')">预约</a>
+        <a href="#contact" class="nav-link" data-i18n="contactNav" onclick="scrollToSection(event, 'contact')">联系</a>
         <button id="bgm-toggle-btn" class="nav-link inline-flex items-center gap-2 music-toggle-btn" title="点击播放/暂停背景音乐">
           <svg id="bgm-play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
@@ -778,14 +780,14 @@
           </svg>
         </button>
         <button id="wishlist-button" class="nav-link inline-flex items-center gap-2">
-          购物车
+          <span data-i18n="cart">购物车</span>
           <span id="wishlist-count" class="text-xs px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37]">0</span>
           <span id="wishlist-total-mini" class="text-xs text-[#D4AF37]">¥0</span>
         </button>
       </nav>
       <div id="wishlist-panel" class="absolute right-6 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-[#D4AF37]/30 w-80 p-4 hidden">
         <div class="flex justify-between items-center mb-3">
-          <div class="text-[#0B0B0B] font-semibold">已选菜品</div>
+          <div class="text-[#0B0B0B] font-semibold" data-i18n="cartTitle">已选菜品</div>
           <div id="wishlist-total" class="text-[#D4AF37] font-bold">¥0</div>
         </div>
         <ul id="wishlist-items" class="space-y-2 text-sm text-[#4A4A4A]"></ul>
@@ -803,18 +805,18 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative z-10">
       <div class="z-10 space-y-6">
         <p class="text-sm uppercase tracking-widest text-[#D4AF37] font-medium">传统与匠心</p>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-white hero-ani-fadeinit" id="heroTitle" style="letter-spacing: 0.05em; font-weight: 700;">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-white hero-ani-fadeinit" id="heroTitle" data-i18n="heroTitle" style="letter-spacing: 0.05em; font-weight: 700;">
           颐和堂 — 精致中式私厨
         </h2>
-        <p class="text-base md:text-lg text-gray-300 max-w-xl leading-relaxed hero-ani-fadeinit" id="heroDesc">
+        <p class="text-base md:text-lg text-gray-300 max-w-xl leading-relaxed hero-ani-fadeinit" id="heroDesc" data-i18n="heroDesc">
           在这里，每一道菜都讲述一个来自东方的故事。甄选时令食材，配以现代烹饪技法，营造温暖而高雅的用餐体验。
         </p>
         <div class="hero-divider hero-ani-fadeinit" id="heroLine"></div>
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href="#reserve" onclick="scrollToSection(event, 'reserve')" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn1">
+          <a href="#reserve" onclick="scrollToSection(event, 'reserve')" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn1" data-i18n="heroBtn1">
             立即预约
           </a>
-          <a href="#menu" onclick="scrollToSection(event, 'menu')" class="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/20 text-white font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn2">
+          <a href="#menu" onclick="scrollToSection(event, 'menu')" class="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/20 text-white font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300 hero-ani-fadeinit" id="heroBtn2" data-i18n="heroBtn2">
             查看菜单
           </a>
         </div>
@@ -823,14 +825,14 @@
             <svg class="w-4 h-4 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>营业时间：周一 - 周日 11:30 — 22:00</span>
+            <span id="openingHourSpan">营业时间：周一 - 周日 11:30 — 22:00</span>
           </div>
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span>地址：果燃省 果燃市 对抗路 17 号</span>
+            <span id="addressSpan">地址：果燃省 果燃市 对抗路 17 号</span>
           </div>
         </div>
       </div>
@@ -848,26 +850,26 @@
   <section id="menu" class="py-24 bg-gradient-to-b from-white/95 via-white/92 to-[#faf8f3]/90">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]">我们的菜单</h2>
-        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg mb-8">
+        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]" data-i18n="menuTitle">我们的菜单</h2>
+        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg mb-8" data-i18n="menuDesc">
           甄选当季食材，结合传统手法与现代演绎，呈现多款招牌与创新菜式。
         </p>
         
         <!-- 分类筛选按钮 -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <button onclick="filterMenu('all')" class="filter-btn active px-6 py-3 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+          <button onclick="filterMenu('all')" class="filter-btn active px-6 py-3 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]" data-i18n="filterAll">
             全部
           </button>
-          <button onclick="filterMenu('appetizer')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]">
+          <button onclick="filterMenu('appetizer')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]" data-i18n="filterAppetizer">
             前菜
           </button>
-          <button onclick="filterMenu('main')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]">
+          <button onclick="filterMenu('main')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]" data-i18n="filterMain">
             主菜
           </button>
-          <button onclick="filterMenu('signature')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]">
+          <button onclick="filterMenu('signature')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]" data-i18n="filterSignature">
             招牌菜
           </button>
-          <button onclick="filterMenu('beverage')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]">
+          <button onclick="filterMenu('beverage')" class="filter-btn px-6 py-3 rounded-full bg-white border-2 border-[#D4AF37]/30 text-[#0B0B0B] font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]" data-i18n="filterBeverage">
             饮品与酒水
           </button>
       </div>
@@ -877,12 +879,12 @@
       <div class="menu-category-section mb-16" data-category="appetizer">
         <div class="text-center mb-8 cursor-pointer" onclick="toggleCategory('appetizer')">
           <div class="flex items-center justify-center gap-3">
-            <h3 class="menu-category-title font-serif">前菜</h3>
+            <h3 class="menu-category-title font-serif" data-i18n="appetizersTitle">前菜</h3>
             <svg id="icon-appetizer" class="w-6 h-6 text-[#D4AF37] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
-          <p class="menu-category-subtitle">Appetizers</p>
+          <p class="menu-category-subtitle" data-i18n="appetizersSubtitle">Appetizers</p>
         </div>
         <div class="menu-category-divider"></div>
         <div id="content-appetizer" class="menu-category-content">
@@ -1309,8 +1311,8 @@
   <section id="beverages" class="py-24 bg-gradient-to-b from-white/95 via-white/92 to-[#faf8f3]/90">
     <div class="max-w-7xl mx-auto px-6 menu-category-section" data-category="beverage">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]">饮品与酒水</h2>
-        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg">
+        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]" data-i18n="beverageTitle">饮品与酒水</h2>
+        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg" data-i18n="beverageDesc">
           精选茶饮与佳酿，为您的用餐体验增添雅致与韵味
         </p>
       </div>
@@ -1801,8 +1803,8 @@
   <section id="gallery" class="py-24 bg-white/95">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]">图集</h2>
-        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg">
+        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]" data-i18n="galleryTitle">图集</h2>
+        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg" data-i18n="galleryDesc">
           记录每一道菜品的精致瞬间，感受中式料理的艺术之美
         </p>
       </div>
@@ -1854,32 +1856,32 @@
         </div>
         <div class="space-y-6">
           <div>
-            <p class="text-sm uppercase tracking-widest text-[#D4AF37] font-medium mb-2">关于我们</p>
-            <h2 class="text-3xl md:text-4xl font-serif mb-6 text-[#0B0B0B]" style="letter-spacing: 0.02em;">颐和堂的故事</h2>
+            <p class="text-sm uppercase tracking-widest text-[#D4AF37] font-medium mb-2" data-i18n="aboutLabel">关于我们</p>
+            <h2 class="text-3xl md:text-4xl font-serif mb-6 text-[#0B0B0B]" data-i18n="aboutTitle" style="letter-spacing: 0.02em;">颐和堂的故事</h2>
           </div>
           <div class="space-y-4 text-[#4A4A4A] leading-relaxed">
-            <p class="text-lg">
+            <p class="text-lg" id="aboutP1">
               在1997年的果燃省果燃市，颐和堂创立于对传统中餐文化的深度理解与现代烹饪理念的创新融合。我们相信，每一道菜都承载着深厚的文化底蕴，每一次用餐都是一次与东方美学的对话。
             </p>
-            <p>
+            <p id="aboutP2">
               我们甄选全球优质食材，结合传统烹饪技法与现代呈现方式，致力于为每一位客人提供精致而温暖的中式私厨体验。在这里，传统不再是束缚，而是创新的源泉。
             </p>
-            <p>
+            <p id="aboutP3">
               从食材的挑选到菜品的呈现，每一个细节都经过精心打磨。我们追求的不只是味觉的满足，更是对中式料理艺术的全新诠释。
             </p>
           </div>
           <div class="pt-4 flex items-center gap-6">
             <div>
               <div class="text-3xl font-bold text-[#D4AF37]">25+</div>
-              <div class="text-sm text-[#4A4A4A]">年经验</div>
+              <div class="text-sm text-[#4A4A4A]" id="expLabel">年经验</div>
             </div>
             <div>
               <div class="text-3xl font-bold text-[#D4AF37]">500+</div>
-              <div class="text-sm text-[#4A4A4A]">道菜品</div>
+              <div class="text-sm text-[#4A4A4A]" id="dishesLabel">道菜品</div>
             </div>
             <div>
               <div class="text-3xl font-bold text-[#D4AF37]">10000+</div>
-              <div class="text-sm text-[#4A4A4A]">满意客户</div>
+              <div class="text-sm text-[#4A4A4A]" id="customersLabel">满意客户</div>
             </div>
           </div>
         </div>
@@ -1891,8 +1893,8 @@
   <section id="reserve" class="py-24 bg-gradient-to-br from-[#0B0B0B] via-[#1a1a1a] to-[#0B0B0B]">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-white">预约用餐</h2>
-        <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-white" data-i18n="reserveTitle">预约用餐</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg" data-i18n="reserveDesc">
           提前预约，享受专属服务与精致用餐体验
         </p>
       </div>
@@ -1900,37 +1902,37 @@
         <form id="reservationForm" class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-[#D4AF37] text-sm font-medium mb-2">姓名</label>
-              <input type="text" name="name" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入您的姓名">
+              <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveName">姓名</label>
+              <input type="text" name="name" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" data-i18n="reserveNamePlaceholder" placeholder="请输入您的姓名">
             </div>
             <div>
-              <label class="block text-[#D4AF37] text-sm font-medium mb-2">联系电话</label>
-              <input type="tel" name="phone" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="请输入联系电话">
+              <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reservePhone">联系电话</label>
+              <input type="tel" name="phone" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" data-i18n="reservePhonePlaceholder" placeholder="请输入联系电话">
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-[#D4AF37] text-sm font-medium mb-2">用餐日期</label>
+              <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveDate">用餐日期</label>
               <input type="date" name="date" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
             </div>
             <div>
-              <label class="block text-[#D4AF37] text-sm font-medium mb-2">用餐人数</label>
+              <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveGuests">用餐人数</label>
               <select name="guests" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
-                <option value="" class="bg-[#0B0B0B]">请选择人数</option>
-                <option value="1" class="bg-[#0B0B0B]">1人</option>
-                <option value="2" class="bg-[#0B0B0B]">2人</option>
-                <option value="3-4" class="bg-[#0B0B0B]">3-4人</option>
-                <option value="5-6" class="bg-[#0B0B0B]">5-6人</option>
-                <option value="7+" class="bg-[#0B0B0B]">7人以上</option>
+                <option value="" class="bg-[#0B0B0B]" data-i18n="reserveGuestsPlaceholder">请选择人数</option>
+                <option value="1" class="bg-[#0B0B0B]" data-i18n="reserveGuest1">1人</option>
+                <option value="2" class="bg-[#0B0B0B]" data-i18n="reserveGuest2">2人</option>
+                <option value="3-4" class="bg-[#0B0B0B]" data-i18n="reserveGuest34">3-4人</option>
+                <option value="5-6" class="bg-[#0B0B0B]" data-i18n="reserveGuest56">5-6人</option>
+                <option value="7+" class="bg-[#0B0B0B]" data-i18n="reserveGuest7Plus">7人以上</option>
               </select>
             </div>
           </div>
           <div>
-            <label class="block text-[#D4AF37] text-sm font-medium mb-2">特殊要求</label>
-            <textarea name="requirements" rows="4" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="如有特殊要求或备注，请在此填写"></textarea>
+            <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveRequirements">特殊要求</label>
+            <textarea name="requirements" rows="4" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" data-i18n="reserveReqPlaceholder" placeholder="如有特殊要求或备注，请在此填写"></textarea>
           </div>
           <div class="pt-4">
-            <button type="submit" class="w-full px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300">
+            <button type="submit" class="w-full px-8 py-4 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium shadow-lg hover:bg-[#D4AF37] hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300" data-i18n="reserveSubmit">
               提交预约
             </button>
           </div>
@@ -1943,8 +1945,8 @@
   <section id="contact" class="py-24 bg-white/95">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]">联系我们</h2>
-        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg">欢迎随时与我们取得联系</p>
+        <h2 class="text-3xl md:text-4xl font-serif mb-4 text-[#0B0B0B]" data-i18n="contactTitle">联系我们</h2>
+        <p class="text-[#4A4A4A] max-w-2xl mx-auto text-lg" data-i18n="contactDesc">欢迎随时与我们取得联系</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center p-8 bg-white rounded-2xl shadow-md">
@@ -1953,7 +1955,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]">电话</h3>
+          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]" data-i18n="contactPhone">电话</h3>
           <a href="tel:+86-138-0000-0000" class="text-[#4A4A4A] hover:text-[#8B0000] transition-colors">+86 138-0000-0000</a>
         </div>
         <div class="text-center p-8 bg-white rounded-2xl shadow-md">
@@ -1962,7 +1964,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]">邮箱</h3>
+          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]" data-i18n="contactEmail">邮箱</h3>
           <a href="mailto:reservations@yihetang.com" class="text-[#4A4A4A] hover:text-[#8B0000] transition-colors">reservations@yihetang.com</a>
         </div>
         <div class="text-center p-8 bg-white rounded-2xl shadow-md">
@@ -1972,7 +1974,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]">地址</h3>
+          <h3 class="text-lg font-semibold mb-2 text-[#0B0B0B]" data-i18n="contactAddress">地址</h3>
           <p class="text-[#4A4A4A]">果燃市 对抗路 17 号</p>
         </div>
       </div>
