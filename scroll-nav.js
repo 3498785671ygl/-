@@ -1,44 +1,77 @@
-// 导航栏滚动显示/隐藏功能
+// 导航栏滚动显示/隐藏功能 - 修复全页面生效
 const headerController = {
   header: null,
   lastScrollTop: 0,
   isHidden: false,
+  scrollThreshold: 20,
+  scrollTimeout: null,
   
   init() {
     this.header = document.querySelector('header');
     if (!this.header) return;
     
-    // 添加CSS类用于动画
+    // 强制设置header为fixed定位（必须）
+    this.header.style.position = 'fixed';
+    this.header.style.top = '0';
+    this.header.style.left = '0';
+    this.header.style.right = '0';
+    this.header.style.width = '100%';
+    this.header.style.zIndex = '50';
+    
+    // 添加CSS类用于平滑动画
     if (!document.getElementById('header-scroll-style')) {
       const style = document.createElement('style');
       style.id = 'header-scroll-style';
       style.textContent = `
         header {
+          will-change: transform;
           transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
         }
         header.header-hidden {
           transform: translateY(-100%);
           opacity: 0;
+          pointer-events: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          header {
+            transition: none;
+          }
+        }
+        body {
+          padding-top: 0;
         }
       `;
       document.head.appendChild(style);
     }
     
+    // 绑定scroll事件到window，确保全页面生效
     window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
   },
   
   handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollDelta = Math.abs(scrollTop - this.lastScrollTop);
+    
+    // 滚动距离小于阈值时不处理（防抖）
+    if (scrollDelta < this.scrollThreshold) {
+      return;
+    }
+    
     const isScrollingDown = scrollTop > this.lastScrollTop;
     
-    if (scrollTop === 0) {
-      // 在页面顶部，始终显示
+    // 页面顶部始终显示
+    if (scrollTop === 0 || scrollTop < 5) {
       if (this.isHidden) this.show();
-    } else if (isScrollingDown && !this.isHidden) {
-      // 向下滚动，隐藏（全页面生效）
+      this.lastScrollTop = scrollTop;
+      return;
+    }
+    
+    // 向下滚动隐藏（全页面任何位置）
+    if (isScrollingDown && !this.isHidden) {
       this.hide();
-    } else if (!isScrollingDown && this.isHidden) {
-      // 向上滚动，显示（全页面生效）
+    } 
+    // 向上滚动显示（全页面任何位置）
+    else if (!isScrollingDown && this.isHidden) {
       this.show();
     }
     
