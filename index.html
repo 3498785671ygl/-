@@ -1913,7 +1913,8 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveDate">用餐日期</label>
-              <input type="date" name="date" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent">
+              <input type="text" name="date" id="dateInput" class="w-full px-4 py-3 bg-white/10 border border-[#D4AF37]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent" placeholder="yyyy/mm/dd">
+              <p class="text-xs text-gray-400 mt-1" id="dateFormatHint">例: 2025/12/22</p>
             </div>
             <div>
               <label class="block text-[#D4AF37] text-sm font-medium mb-2" data-i18n="reserveGuests">用餐人数</label>
@@ -2316,7 +2317,8 @@
           const btn = document.createElement('button');
           btn.className = 'mt-4 w-full md:w-auto md:self-end inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0B0B0B] border-2 border-[#D4AF37] text-[#D4AF37] font-medium hover:bg-[#D4AF37] hover:text-[#0B0B0B] transition';
           btn.textContent = '加入心愿单';
-          btn.onclick = ()=> addToWishlist(name, price);
+          // 修复：阻止按钮点击事件冒泡到卡片click事件
+          btn.onclick = (e)=>{ e.stopPropagation(); addToWishlist(name, price); };
           container.appendChild(btn);
         });
       }
@@ -2444,6 +2446,33 @@
           dateInput.focus();
           return;
         }
+
+        // 校验日期格式 (yyyy/mm/dd)
+        const dateRegex = /^\d{4}\/\d{2}\/\d{2}$/;
+        if (!dateRegex.test(date)) {
+          alert('日期格式不正确，请输入 yyyy/mm/dd 格式（例：2025/12/22）');
+          dateInput.focus();
+          return;
+        }
+
+        // 校验日期是否有效
+        const [year, month, day] = date.split('/').map(Number);
+        const dateObj = new Date(year, month - 1, day);
+        if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month - 1 || dateObj.getDate() !== day) {
+          alert('请输入有效的日期');
+          dateInput.focus();
+          return;
+        }
+
+        // 校验日期不能是过去的日期
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (dateObj < today) {
+          alert('预约日期不能早于今天');
+          dateInput.focus();
+          return;
+        }
+
         if (!guests) {
           alert('请选择用餐人数');
           guestsInput.focus();
@@ -2912,8 +2941,12 @@
           // 添加光标样式
           card.style.cursor = 'pointer';
           
-          // 点击卡片打开弹窗
-          card.addEventListener('click', function() {
+          // 点击卡片打开弹窗 - 修复：阻止按钮冒泡导致的事件冲突
+          card.addEventListener('click', function(e) {
+            // 如果点击的是按钮或其包含的元素，不打开弹窗
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+              return;
+            }
             currentDishName = dishName;
             
             // 从数据库获取数据，或从HTML中获取
@@ -2934,13 +2967,16 @@
               };
             }
             
-            // 设置弹窗内容
+            // 设置弹窗内容 - 修复：根据当前语言动态设置文本
             document.getElementById('dishDetailsNameCN').textContent = dishData.nameCN;
             document.getElementById('dishDetailsNameEN').textContent = dishData.nameEN;
             document.getElementById('dishDetailsPrice').textContent = dishData.price;
             document.getElementById('dishDetailsImage').src = dishData.image;
             document.getElementById('dishDetailsImage').alt = dishData.nameCN;
             document.getElementById('dishDetailsScore').textContent = dishData.score.toFixed(1);
+            // 翻译描述和评价（如果当前非中文，则翻译相应内容）
+            const descKey = dishName + '_desc';
+            const commentKey = dishName + '_comment';
             document.getElementById('dishDetailsDescription').textContent = dishData.description;
             document.getElementById('dishDetailsComment').textContent = dishData.comment;
             
@@ -2967,12 +3003,17 @@
             if (dishData.userScore && dishData.userScore > 0) {
               userRatingDisplay.textContent = `您的评分：${dishData.userScore.toFixed(1)}/10`;
             } else {
-              userRatingDisplay.textContent = '暂无评分';
+              userRatingDisplay.textContent = i18n.t('dishModalRatingNo');
             }
             
             // 显示弹窗
             modal.classList.remove('hide');
             modal.classList.add('show');
+            
+            // 修复：弹窗打开时更新所有文本为当前语言
+            if (typeof i18n !== 'undefined' && typeof i18n.updateModalAndDateFormat === 'function') {
+              i18n.updateModalAndDateFormat();
+            }
           });
         });
         
@@ -2985,7 +3026,11 @@
             
             // 验证评分
             if (isNaN(rating) || rating < 0 || rating > 10) {
-              alert('请输入0-10之间的有效评分');
+              // 修复：根据当前语言显示提示消息
+              const alertMsg = i18n && i18n.currentLang === 'en' 
+                ? 'Please enter a valid rating between 0-10' 
+                : '请输入0-10之间的有效评分';
+              alert(alertMsg);
               return;
             }
             
@@ -3001,14 +3046,20 @@
               
               // 更新显示
               const userRatingDisplay = document.getElementById('userRatingDisplay');
-              userRatingDisplay.textContent = `您的评分：${rating.toFixed(1)}/10 ✓`;
+              const ratedText = i18n && i18n.currentLang === 'en'
+                ? `Your rating: ${rating.toFixed(1)}/10 ✓`
+                : `您的评分：${rating.toFixed(1)}/10 ✓`;
+              userRatingDisplay.textContent = ratedText;
               
               // 清空输入框
               userRatingInput.value = '';
               
               // 显示成功提示
               setTimeout(() => {
-                userRatingDisplay.textContent = `您的评分：${rating.toFixed(1)}/10`;
+                const successText = i18n && i18n.currentLang === 'en'
+                  ? `Your rating: ${rating.toFixed(1)}/10`
+                  : `您的评分：${rating.toFixed(1)}/10`;
+                userRatingDisplay.textContent = successText;
               }, 1500);
             }
           });
