@@ -1,68 +1,491 @@
-# 课程作业 - 中餐厅网页
+# 颐和堂 — 高端中式餐厅官网
 
-## 1. 网站的主题和目的
+## 项目简介
 
-本项目旨在设计一个精美、现代化的中式餐厅展示网站，模拟真实餐厅官网的视觉效果与交互功能，包括菜品展示、搜索功能、购物车系统、分类跳转等。  
-项目目标包括：
-- 掌握前端开发基本技能
-- 学习网页交互功能的实现
-- 将网页成功部署到 GitHub Pages 用于公开展示
+**项目名称**：颐和堂官网  
+**项目性质**：课程作业  
+**项目主题**：高端中式餐厅网页展示
 
----
-
-## 2. 使用的技术和工具
-
-- HTML5：页面结构
-- CSS3 / Tailwind：样式设计与动画
-- JavaScript：搜索、购物车、页面交互
-- VS Code：开发环境
-- Git & GitHub：项目管理与版本控制
-- GitHub Pages：项目发布
-- 图片资源：assets/gallery（菜品），assets/menu（酒水）
+本项目为前端课程作业，实现一个高端中式餐厅的官网页面，展示餐厅信息、菜品展示、在线预约等功能。
 
 ---
 
-## 3. 已实现功能的描述
+## 技术栈
 
-### 3.1 菜品分类展示  
-网站包含四大分类：  
-- 前菜  
-- 主菜  
-- 招牌菜  
-- 酒水与饮品  
-
-每个菜品均包含图片、名称、英文名、描述与价格。
-
-### 3.2 搜索功能（search.js）  
-- 输入菜名后可跳转到对应菜品位置  
-- 被搜到的菜品会自动居中显示  
-- 高亮边框动画效果引导用户注意  
-- 不隐藏其他菜品
-
-### 3.3 顶部导航栏  
-- 可跳转到不同分类区域  
-- 含搜索框  
-- 黑金渐变视觉风格（如已实现）
-
-### 3.4 购物车系统  
-- 添加菜品到购物车  
-- 修改数量时不会自动关闭购物车  
-- 删除单项 / 一键清空购物车  
-- 可持久保存数据（如使用 localStorage）
+- **HTML**：单页面结构
+- **CSS**：独立样式表（`style.css`）
+- **JavaScript**：原生 JavaScript，无框架依赖
+- **后端**：无
+- **部署**：静态文件（可通过 GitHub Pages 部署）
 
 ---
 
-## 4. 页面截图
+## 页面结构
 
-![首页示例](https://github.com/3498785671ygl/-/blob/main/assets/screenshots/%E4%B8%BB%E9%A1%B5.png)
-![菜品展示](https://github.com/3498785671ygl/-/blob/main/assets/screenshots/%E8%8F%9C%E5%8D%95.png)
-![购物车示例](https://github.com/3498785671ygl/-/blob/main/assets/screenshots/%E8%B4%AD%E7%89%A9%E8%BD%A6.png?raw=true)
+### 顶部导航栏
+- 餐厅Logo与名称
+- 菜单搜索框
+- 导航链接（锚点跳转）：菜单 / 图集 / 关于 / 预约 / 联系
+- 背景音乐控制按钮
+- 购物车按钮与计数
+
+### 主视觉区域
+- 餐厅名称与介绍文案
+- 行动按钮（预约 / 查看菜单）
+- 营业时间与地址信息
+- 背景图片与渐变效果
+
+### 菜单系统
+- 分类筛选：全部 / 前菜 / 主菜 / 招牌菜 / 饮品与酒水
+- 可折叠菜品分类展示
+- 菜品卡片：图片、名称、描述、价格、评分
+
+### 图集展示
+- 餐厅环境与菜品照片网格
+
+### 关于我们
+- 餐厅介绍文案
+- 配图
+- 运营统计数据展示
+
+### 预约用餐
+- 表单字段：姓名、电话、日期、人数、特殊要求
+- 提交按钮与成功提示弹窗
+
+### 联系我们
+- 电话、邮箱、地址信息卡片
+
+### 菜品详情弹窗
+- 菜品大图
+- 中英文菜名、价格
+- 菜品介绍
+- 用户评分输入与显示
+
+### 购物车弹窗
+- 已选菜品列表
+- 菜品数量与小计
+- 总金额显示
+- 清空与关闭操作
 
 ---
 
-## 5. 已发布版本的链接
+## 功能说明
 
-(https://3498785671ygl.github.io/-/)
+### 菜单与搜索
+- 菜品分类展示与切换
+- 搜索框支持中英文菜品名称搜索
+- 搜索结果自动平滑滚动至目标菜品
+
+### 菜品交互
+- 点击菜品卡片弹出详情窗口
+- 菜品详情展示评分、介绍文案
+- 支持用户输入评分
+
+### 购物车
+- 添加菜品至购物车
+- 调整菜品数量
+- 删除单个菜品
+- 清空整个购物车
+- 实时显示购物车数量与总金额
+
+### 预约用餐
+- 填写预约表单（姓名、电话、日期、人数、特殊要求）
+- 表单提交后显示成功提示弹窗
+- 表单数据验证
+
+### 多语言支持
+- 中文 / 英文界面切换
+- 导航栏语言切换按钮
+- 页面所有文本动态更新（包括表单标签、占位符、按钮文本）
+
+### 导航交互
+- 导航栏滚动时自动隐藏 / 显示
+- 点击导航链接平滑滚动至相应区域
+- 搜索框聚焦与搜索功能
+
+### 背景音乐
+- 导航栏音乐播放 / 暂停控制
+- 播放状态图标切换
+
+---
+
+## 样式与设计
+
+- **配色方案**：黑金风格（深黑 + 金色点缀）
+- **背景**：低速流动渐变动效背景
+- **可读性**：半透明白色背景块用于内容区域
+- **动效**：平滑的过渡与淡入淡出效果
+- **排版**：清晰的层级与留白
+
+---
+
+## 使用说明
+
+### 本地查看
+1. 下载项目文件
+2. 在浏览器中打开 `index.html` 文件
+
+### 功能操作
+- **菜品搜索**：在顶部搜索框输入菜品名称，回车或点击搜索图标
+- **菜单分类**：点击分类按钮进行菜单筛选
+- **菜品详情**：点击菜品卡片查看详细信息
+- **购物车**：点击导航栏购物车按钮打开购物车面板
+- **语言切换**：点击导航栏右侧"EN"或"中"按钮切换语言
+- **音乐播放**：点击导航栏音乐图标播放 / 暂停背景音乐
+- **预约**：向下滚动至预约区域，填写表单并提交
+
+---
+
+## 文件结构
+
+```
+├── index.html          # 主页面文件
+├── style.css           # 全局样式表
+├── i18n.js             # 多语言配置与管理
+├── scroll-nav.js       # 导航滚动与搜索功能
+├── search.js           # 搜索兼容性文件
+├── README.md           # 本文件
+└── assets/             # 资源文件夹（图片、音频等）
+```
 
 
+## 📦 安装和设置
+
+### 1. 安装依赖
+
+```bash
+npm install react react-dom framer-motion
+npm install -D tailwindcss postcss autoprefixer
+```
+
+### 2. 初始化 Tailwind CSS
+
+```bash
+npx tailwindcss init -p
+```
+
+在 `tailwind.config.js` 中添加内容路径：
+
+```javascript
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./RestaurantLanding.jsx"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+### 3. 创建 CSS 入口文件
+
+创建 `src/index.css` 或 `styles.css`：
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 4. 导入组件
+
+在你的主应用文件中：
+
+```jsx
+import RestaurantLanding from './RestaurantLanding';
+import './styles.css';
+
+function App() {
+  return <RestaurantLanding />;
+}
+```
+
+## 🖼️ 替换图片资源
+
+### 图片资源列表
+
+所有图片应放置在 `public/assets/` 目录下：
+
+| 文件名 | 建议尺寸 | 用途 | 说明 |
+|--------|---------|------|------|
+| `logo.svg` | 200x60 | Logo | SVG 格式，透明背景 |
+| `hero.jpg` | 1920x1080 | Hero 主图 | 高质量食物摆盘 |
+| `dish-1.jpg` 到 `dish-6.jpg` | 800x600 | 菜品图片 | 正方形或 4:3 比例 |
+| `gallery-1.jpg` 到 `gallery-6.jpg` | 1200x800 | 画廊图片 | 16:9 或 3:2 比例 |
+| `chef.jpg` | 800x1000 | 主厨照片 | 竖版人像 |
+
+### 图片优化建议
+
+1. **格式选择**：
+   - Logo：使用 SVG
+   - 照片：使用 WebP 或优化的 JPEG
+   - 考虑提供 `@2x` 版本用于高分辨率屏幕
+
+2. **压缩工具**：
+   - [TinyPNG](https://tinypng.com/)
+   - [Squoosh](https://squoosh.app/)
+   - [ImageOptim](https://imageoptim.com/)
+
+3. **懒加载**：
+   - 组件已实现 `loading="lazy"` 属性
+   - Hero 图片使用 `loading="eager"` 优先加载
+
+## 📝 编辑内容
+
+### 修改餐厅信息
+
+编辑 `RestaurantLanding.jsx` 文件中的 `restaurantData` 对象：
+
+```jsx
+const restaurantData = {
+  name: '你的餐厅名',
+  subtitle: '副标题',
+  tagline: '标语',
+  // ... 其他内容
+};
+```
+
+### 修改菜单
+
+在 `restaurantData.menu.dishes` 数组中添加或修改菜品：
+
+```jsx
+{
+  title: '菜品名称',
+  description: '菜品描述',
+  price: '¥价格',
+  image: '/assets/dish-X.jpg',
+  category: '分类', // 用于筛选功能
+}
+```
+
+### 修改联系方式
+
+更新 `restaurantData.contact` 对象中的信息。
+
+## 🔌 集成预约后端
+
+### 方法 1：使用表单提交
+
+修改预约表单的 `onSubmit` 处理函数：
+
+```jsx
+onSubmit={async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  
+  try {
+    const response = await fetch('/api/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        date: formData.get('date'),
+        time: formData.get('time'),
+        guests: formData.get('guests'),
+        message: formData.get('message'),
+      }),
+    });
+    
+    if (response.ok) {
+      alert('预约成功！我们会尽快与您联系。');
+      e.target.reset();
+    } else {
+      alert('预约失败，请稍后重试。');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('发生错误，请稍后重试。');
+  }
+}}
+```
+
+### 方法 2：使用第三方服务
+
+#### 使用 Google Forms
+1. 创建 Google 表单
+2. 获取表单提交 URL
+3. 修改表单 action 属性
+
+#### 使用第三方预约系统
+- [OpenTable](https://www.opentable.com/)
+- [Resy](https://resy.com/)
+- [Tock](https://www.exploretock.com/)
+
+集成示例：
+
+```jsx
+<a
+  href="https://www.opentable.com/your-restaurant"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#8B0000] text-white font-medium"
+>
+  立即预约
+</a>
+```
+
+## 🚀 部署为静态站点
+
+### 方法 1：使用 Create React App
+
+```bash
+# 创建项目
+npx create-react-app restaurant-website
+cd restaurant-website
+
+# 复制组件文件
+cp RestaurantLanding.jsx src/
+
+# 安装依赖
+npm install framer-motion
+
+# 构建
+npm run build
+
+# 部署 build 文件夹到任何静态托管服务
+```
+
+### 方法 2：使用 Vite
+
+```bash
+# 创建项目
+npm create vite@latest restaurant-website -- --template react
+cd restaurant-website
+
+# 安装依赖
+npm install
+npm install framer-motion
+
+# 复制组件文件
+cp RestaurantLanding.jsx src/
+
+# 构建
+npm run build
+
+# 部署 dist 文件夹
+```
+
+### 方法 3：使用 Next.js（SSG）
+
+```bash
+# 创建项目
+npx create-next-app restaurant-website
+cd restaurant-website
+
+# 安装依赖
+npm install framer-motion
+
+# 在 pages/index.js 中使用组件
+# 构建
+npm run build
+
+# 导出静态站点
+npm run export
+```
+
+### 推荐的托管服务
+
+- **Vercel**：`vercel deploy`
+- **Netlify**：拖拽 `build` 文件夹到 Netlify
+- **GitHub Pages**：使用 `gh-pages` 包
+- **Cloudflare Pages**：连接 Git 仓库自动部署
+
+## 🎯 SEO 优化
+
+### 1. 添加 Meta 标签
+
+在 HTML `<head>` 中添加（参考 `seo-meta-example.html`）：
+
+```html
+<title>颐和堂 - 精致中式私厨 | 现代中餐体验</title>
+<meta name="description" content="颐和堂致力于将传统中餐与现代烹饪理念相结合，提供精致的中式私厨体验。">
+<meta name="keywords" content="中餐厅,私厨,精致中餐,米其林,预约">
+```
+
+### 2. 添加结构化数据
+
+参考 `seo-json-ld-example.json` 文件，在页面中添加 JSON-LD 脚本。
+
+### 3. Open Graph 标签
+
+```html
+<meta property="og:title" content="颐和堂 - 精致中式私厨">
+<meta property="og:description" content="现代中餐体验，传统与创新的完美融合">
+<meta property="og:image" content="https://yourdomain.com/assets/hero.jpg">
+<meta property="og:url" content="https://yourdomain.com">
+```
+
+## ♿ 可访问性检查清单
+
+- ✅ 所有图片都有 `alt` 文本
+- ✅ 导航链接有 `aria-label`
+- ✅ 表单字段有 `label` 和 `id` 关联
+- ✅ 按钮有焦点状态（`focus:ring`）
+- ✅ 颜色对比度符合 WCAG AA 标准
+- ✅ 键盘导航支持（Tab、Enter、Esc）
+
+## 🎨 CSS Class 说明
+
+### 常用工具类
+
+- `bg-[#8B0000]` - 深红背景
+- `text-[#0B0B0B]` - 墨黑文字
+- `bg-[#F8F4F0]` - 象牙白背景
+- `text-[#4A4A4A]` - 灰色文字
+- `rounded-2xl` - 大圆角（16px）
+- `rounded-full` - 完全圆形
+- `shadow-lg` - 大阴影
+- `hover:scale-110` - 悬停放大效果
+- `transition-all duration-300` - 平滑过渡动画
+
+### 响应式类
+
+- `hidden md:block` - 移动端隐藏，桌面端显示
+- `grid-cols-1 md:grid-cols-2` - 响应式网格
+- `text-4xl md:text-5xl` - 响应式文字大小
+
+## 📚 变量清单
+
+所有可编辑的变量都在 `restaurantData` 对象中：
+
+- `restaurantData.name` - 餐厅名称
+- `restaurantData.subtitle` - 副标题
+- `restaurantData.tagline` - 标语
+- `restaurantData.hero.*` - Hero 区域内容
+- `restaurantData.menu.*` - 菜单内容
+- `restaurantData.gallery.*` - 画廊内容
+- `restaurantData.about.*` - 关于我们内容
+- `restaurantData.contact.*` - 联系信息
+
+## 🐛 常见问题
+
+### Q: 动画不工作？
+A: 确保已安装 `framer-motion`：`npm install framer-motion`
+
+### Q: Tailwind 样式不生效？
+A: 检查 `tailwind.config.js` 中的 `content` 路径是否正确
+
+### Q: 图片不显示？
+A: 确保图片路径正确，图片文件存在于 `public/assets/` 目录
+
+### Q: 如何修改颜色？
+A: 在组件中搜索颜色值（如 `#8B0000`）并替换，或使用 Tailwind 配置扩展主题
+
+## 📄 许可证
+
+MIT License - 可自由使用和修改
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+---
+
+**提示**：这是一个单文件组件，可以直接复制到你的项目中使用。所有内容都通过 `restaurantData` 对象管理，便于后续集成 CMS 系统。
 
