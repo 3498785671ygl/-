@@ -94,6 +94,17 @@ const i18n = {
       searchPlaceholder: '搜索菜品…',
       searchNotFound: '未找到',
       
+      // Modal text - 菜品详情弹窗
+      dishModalIntro: '菜品介绍',
+      dishModalRating: '您的评分',
+      dishModalRatingPlaceholder: '请输入0-10的评分',
+      dishModalRatingSubmit: '提交评分',
+      dishModalRatingNo: '暂无评分',
+      
+      // Date format
+      dateFormatExample: '例: 2025/12/22',
+      dateFormatExampleEn: 'e.g. 2025/12/22',
+      
       // Language
       langZh: '中',
       langEn: 'EN',
@@ -189,6 +200,17 @@ const i18n = {
       searchPlaceholder: 'Search dishes…',
       searchNotFound: 'Not found',
       
+      // Modal text - Dish Details Modal
+      dishModalIntro: 'Description',
+      dishModalRating: 'Your Rating',
+      dishModalRatingPlaceholder: 'Please rate 0-10',
+      dishModalRatingSubmit: 'Submit',
+      dishModalRatingNo: 'No rating yet',
+      
+      // Date format
+      dateFormatExample: 'e.g. 2025/12/22',
+      dateFormatExampleEn: 'e.g. 2025/12/22',
+      
       // Language
       langZh: '中',
       langEn: 'EN',
@@ -205,6 +227,7 @@ const i18n = {
     localStorage.setItem('lang', lang);
     this.updatePageContent();
     this.updateSearch();
+    this.updateModalAndDateFormat();
   },
   
   updatePageContent() {
@@ -299,6 +322,42 @@ const i18n = {
           nav.appendChild(langBtn);
         }
       }
+    }
+  },
+  
+  updateModalAndDateFormat() {
+    // 菜品详情弹窗完整翻译
+    const descTitle = document.querySelector('.dish-details-description .description-title');
+    if (descTitle) descTitle.textContent = this.t('dishModalIntro');
+    
+    const ratingTitle = document.querySelector('.dish-rating-section .rating-section-title');
+    if (ratingTitle) ratingTitle.textContent = this.t('dishModalRating');
+    
+    const userRatingInput = document.getElementById('userRatingInput');
+    if (userRatingInput) {
+      userRatingInput.placeholder = this.t('dishModalRatingPlaceholder');
+    }
+    
+    const userRatingBtn = document.getElementById('userRatingSubmitBtn');
+    if (userRatingBtn) {
+      userRatingBtn.textContent = this.t('dishModalRatingSubmit');
+    }
+    
+    const userRatingDisplay = document.getElementById('userRatingDisplay');
+    if (userRatingDisplay && userRatingDisplay.textContent === '暂无评分') {
+      userRatingDisplay.textContent = this.t('dishModalRatingNo');
+    }
+    
+    // 更新日期格式提示文本
+    const dateFormatHint = document.getElementById('dateFormatHint');
+    if (dateFormatHint) {
+      dateFormatHint.textContent = this.currentLang === 'zh' ? '例: 2025/12/22' : 'e.g. 2025/12/22';
+    }
+    
+    // 更新日期输入框 placeholder
+    const dateInput = document.getElementById('dateInput');
+    if (dateInput) {
+      dateInput.placeholder = 'yyyy/mm/dd';
     }
   }
 };
